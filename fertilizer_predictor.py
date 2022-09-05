@@ -184,17 +184,18 @@ def back():
     root1.mainloop()
     
 
-def validate(P):
-    
+def validate(P):    
+    if not bool(P):
+        return True
     if P.isdigit():
-        if int(P)==0 or int(P)<=100:
+        if int(P)==0 or int(P)<=300:
             return True
         else:
-            messagebox.showerror("showerror", "Value cannot be greater than 100")
+            messagebox.showerror("showerror", "Value cannot be greater than 300")
             return False
     else:
-        # messagebox.showerror("showerror", "It was not a Number. Please enter numeric value.")
-        return True
+        messagebox.showerror("showerror", "It was not a Number. Please enter numeric value.")
+        return False
 
     
 

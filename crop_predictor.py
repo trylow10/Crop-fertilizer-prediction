@@ -66,7 +66,6 @@ def func_RF():
     x = metrics.accuracy_score(Ytest, predicted_values)
     acc.append(x)
     model.append('RF')
-
     N = nty_N.get()
     P = nty_P.get()
     K = nty_K.get()                 
@@ -130,7 +129,9 @@ def back():
     root2.mainloop()
     
 
-def validate(P):       
+def validate(P):    
+    if not bool(P):
+        return True
     if P.isdigit():
         if int(P)==0 or int(P)<=300:
             return True
@@ -138,8 +139,9 @@ def validate(P):
             messagebox.showerror("showerror", "Value cannot be greater than 300")
             return False
     else:
-        # messagebox.showerror("showerror", "It was not a Number. Please enter numeric value.")
-        return True   
+        messagebox.showerror("showerror", "It was not a Number. Please enter numeric value.")
+        return False
+
 
 
 head1 = Label(root, justify=LEFT, text="Predictlizer", fg="Dark green" )

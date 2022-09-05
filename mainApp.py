@@ -6,6 +6,7 @@ import os
 import pandas as pd
 import numpy as np
 from PIL import ImageTk,Image
+# from login_page import login
 
 class Main:
     def __init__(self, root):
@@ -33,6 +34,11 @@ class Main:
         self.btn_fp.grid(row=4, column=2,padx=50,pady=20)
         self.btn_fp.place(x=380,y=400)  
   
+        self.btn_logout = Button(root, text="Logout", command=self.run_logout,bg="blue",fg="white", pady=5, width=8)
+        self.btn_logout.config(font=("Times new roman", 18))
+        # self.btn_logout.grid(row=1, column=1, columnspan=4, padx=50)
+        self.btn_logout.place(x=950,y=50)  
+  
     def run_cp(self):
         self.window.destroy()
         import crop_predictor.py
@@ -40,6 +46,13 @@ class Main:
     def run_fp(self):
         self.window.destroy()
         import fertilizer_predictor.py
+
+    def run_logout(self):
+        self.window.destroy()
+        from login_page import login_page
+        root = Tk()
+        obj = login_page(root)
+        root.mainloop()
 
 if __name__ == "__main__":
     root = Tk()
