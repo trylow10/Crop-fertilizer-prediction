@@ -83,7 +83,7 @@ def func_RF():
     l.append(ph)
     l.append(Rainfall)
     data=[l]
-
+    
     prediction = RF.predict(data)
     Pdt_rf = Label(root, text=prediction,fg="Black" )
     Pdt_rf.config(font=("Times", 18))
