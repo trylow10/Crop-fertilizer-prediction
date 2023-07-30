@@ -9,7 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.datasets import make_classification
-from sklearn.metrics import plot_confusion_matrix 
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from sklearn.metrics import classification_report
 from sklearn import metrics
 from sklearn import tree
@@ -143,9 +143,17 @@ def func_RF():
         messagebox.showinfo("RF Fertilizer prediction Report", report2)
 
     def conf_rf():
-        plot_confusion_matrix(RF, Xtest, Ytest, cmap = plt.get_cmap('Blues'))  
-        plt.show()
+         y_pred = RF.predict(Xtest)  
+    cm = confusion_matrix(Ytest, y_pred)
+    display_labels = RF.classes_  
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=display_labels)
 
+    disp.plot(cmap=plt.get_cmap("Blues"))  
+
+    plt.title("Confusion Matrix")
+    plt.xlabel("Predicted Labels")
+    plt.ylabel("True Labels")
+    plt.show()
     rp_rf = Button(root, text="Report", command=rep_rf,bg="white",fg="Dark red", width=15)
     rp_rf.config(font=("Times new roman", 14))
     rp_rf.grid(row=8, column=4,padx=5,pady=10, sticky=W)
