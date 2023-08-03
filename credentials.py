@@ -1,5 +1,7 @@
+import mysql.connector
+
 # User Credentials
 host = 'localhost'
 user = 'root'
-password = ''
-database = 'student_database'
+password = 'root'
+database = 'student_registration'
