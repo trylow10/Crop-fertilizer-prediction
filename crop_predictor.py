@@ -16,6 +16,7 @@ from sklearn import tree
 import warnings
 
 from mainApp import Main
+from test_random_tree import RandomForest
 
 root = Tk()
 root.title("Predictlizer")
@@ -41,12 +42,24 @@ from sklearn.model_selection import train_test_split
 Xtrain, Xtest, Ytrain, Ytest = train_test_split(
     features, target, test_size=0.2, random_state=2
 )
+
 def func_RF():
-    from sklearn.ensemble import RandomForestClassifier
-    RF = RandomForestClassifier(n_estimators=20, random_state=0)
-    RF.fit(Xtrain, Ytrain)
-    predicted_values = RF.predict(Xtest)
-    x = metrics.accuracy_score(Ytest, predicted_values)
+    ###RandomForestClassifier
+    # from sklearn.ensemble import RandomForestClassifier
+    # RF = RandomForestClassifier(n_estimators=20, random_state=0)
+    # RF.fit(Xtrain, Ytrain)
+    # predicted_values = RF.predict(Xtest)
+    # x = metrics.accuracy_score(Ytest, predicted_values)
+    ###RandomForestClassifier
+
+    ###Self built random forest
+    RF = RandomForest(n_trees=20, max_depth=4)
+    RF.fit(Xtrain.values, Ytrain.values)
+    
+    predicted_values = RF.predict(Xtest.values)
+    x = metrics.accuracy_score(Ytest.values, predicted_values)
+    ###Self built random forest
+    
     acc.append(x)
     model.append("RF")
     N = nty_N.get()
@@ -66,6 +79,8 @@ def func_RF():
     l.append(ph)
     l.append(Rainfall)
     data = [l]
+    data = [[int(item) for item in sublist] for sublist in data] ## for custom random forest test_random_tree package
+
 
     prediction = RF.predict(data)
     Pdt_rf = Label(root, text=prediction, fg="Black")
@@ -78,11 +93,13 @@ def func_RF():
 
     def conf_rf():
         y_pred = RF.predict(
-            Xtest
-        )  
+            Xtest.values
+        ) 
+        print('y_pred:- ',y_pred)
         cm = confusion_matrix(Ytest, y_pred)
         display_labels = (
-            RF.classes_
+            # RF.classes_  ##for random classifier
+            RF.get_classes()  ## for self built random forest
         ) 
         disp = ConfusionMatrixDisplay(
             confusion_matrix=cm, display_labels=display_labels
