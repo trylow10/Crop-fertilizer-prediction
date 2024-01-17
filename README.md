@@ -1,6 +1,3 @@
-Certainly! Below is a template for your README.md file. Please replace the placeholder text with your actual project details, URLs, and image paths.
-
-```markdown
 # Crop Fertilizer Prediction
 
 ## Overview
